@@ -71,3 +71,74 @@ for(unsigned char i=0,b=0;i<ROWS;i++,b=0){
     }
     return 0;
 }
+
+//How about this
+
+	srand((unsigned) time(NULL));	
+
+	char a[10][10];
+	memset(a, '.', 10 * 10 * sizeof(char));
+
+	short row = 0, col = 0;
+	bool valid_move;
+
+	a[0][0] = 'A';
+	
+	for (char i = 'B'; i <= 'Z'; i++)
+	{
+		valid_move = false;
+
+		if ((row - 1 < 0 || a[row - 1][col] != '.') &&
+	    	    (col + 1 > 9 || a[row][col + 1] != '.') &&
+	    	    (row + 1 > 9 || a[row + 1][col] != '.') &&
+	    	    (col - 1 < 0 || a[row][col - 1] != '.'))
+	   	{	
+			printf("Error, terminating.\n");
+			break;
+		}
+
+		while (!valid_move)
+		{
+			switch (rand() % 4)
+			{
+				case 0: //walks north
+					if (row - 1 < 0 || a[row - 1][col] != '.') break;
+
+					valid_move = true;
+					a[--row][col] = i;
+					break;
+
+				case 1: //walks east
+					if (col + 1 > 9 || a[row][col + 1] != '.') break;
+
+					valid_move = true;
+					a[row][++col] = i;
+					break;	
+
+				case 2: //walks south
+					if (row + 1 > 9 || a[row + 1][col] != '.') break;
+
+					valid_move = true;
+					a[++row][col] = i;
+					break;	
+
+				case 3: //walks west
+					if (col - 1 < 0 || a[row][col - 1] != '.') break;
+
+					valid_move = true;
+					a[row][--col] = i;
+					break;
+
+				default:
+					break;
+			}
+		} 
+	}
+
+	for (int i = 0; i < 10; i++)
+	{
+		for (int j = 0; j < 10; j++)
+			printf("%3c", a[i][j]);
+		
+		putchar('\n'); 
+	} 
