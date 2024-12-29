@@ -111,3 +111,34 @@ int main(void) {
    printf("%c\n",term);
    return 0;
 }
+
+###Solution 4
+#include <stdio.h>
+#include <ctype.h>
+
+int main (void) {
+    
+	char sentence[100], last_c, c;
+	for (int i = 0; i < 100; sentence[i++] = ' ');
+	int marker;
+
+	printf("Enter a sentence no more than 100 characters: ");
+	for (int i = 0; (c = getchar()) != '.' && c != '?' && c != '!'; i++) sentence[i] = c;
+	last_c = c;
+	printf("In reverse order:");
+
+	for (int i = 99; i >= 0; i--) {
+		putchar(' ');
+		while (sentence[i--] == ' ');
+
+		++i;
+		while (sentence[i] != ' ' && i-- >= 0);
+		
+		marker = ++i;
+		while (sentence[i] != ' ') putchar(sentence[i++]);
+		i = marker;
+	}
+	printf("%c\n", last_c);
+    return 0;
+}
+
