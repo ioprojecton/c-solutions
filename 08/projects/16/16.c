@@ -69,3 +69,29 @@ puts("anagrams");
   return 0;
 }
 
+//Solution 3
+#include <stdio.h>
+#include <ctype.h>
+
+#define SIZE 26
+
+int main (void) 
+{
+	short letters[SIZE] = {0};
+	char c;
+
+	printf("Enter the first word: ");
+	while ((c = toupper(getchar())) != '\n') 
+        c >= 'A' && c <= 'Z' ? letters[c - 'A']++ : 0;
+
+	printf("Enter the second word: ");
+	while ((c = toupper(getchar())) != '\n') 
+        c >= 'A' && c <= 'Z' && letters[c - 'A'] ? letters[c - 'A']-- : 0;
+
+	for (int i = 1; i < SIZE; i++) 
+        letters[0] += letters[i];
+
+	letters[0] ? printf("The words are not anagrams\n") : printf("The words are anagrams\n");
+    return 0;
+}
+
