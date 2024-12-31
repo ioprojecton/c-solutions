@@ -17,3 +17,10 @@ int digit(int n,int k){
     }
     return b;
 }
+
+How about this?
+
+int digit(int n, int k) {
+	return k == 1 ? n % 10 : digit(n / 10, k - 1);
+}
+
